@@ -1,0 +1,308 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter Your Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <style type="text/css">
+        body {
+            background-image: linear-gradient(to bottom, #000000, #00000051, #f8e8c500),
+                              url("{% static 'LungCancer/images/img.jpg' %}");
+            background-position: center;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 50px;
+            margin: 50px 0;
+            border-radius: 10px;
+            max-width: 60%;
+            width: 100%;
+            text-align: center;
+            color: white;
+        }
+
+        /* Customizing the modal content to have a black background */
+    .modal-content {
+        color: black;  /* Set text color to white for better readability */
+    }
+
+    .modal-header, .modal-footer {
+        background-color: white;  /* Darker header/footer for contrast */
+    }
+
+    .modal-title {
+        color: black;  /* Ensure the title is white */
+    }
+
+        h1, p {
+            margin: 0 0 0 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label, Legend {
+            text-align: left;
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+
+
+        input[type="submit"] {
+            background-color: #FF5E57;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #FF2E2E;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Enter Your Lifestyle and Symptoms</h1>
+    <p>Provide accurate details to get the best results.</p>
+    <form action="result" method="post" class="mt-5">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label for="gender" class="form-label">Gender:</label>
+        <select name="n1" id="gender" class="form-select" required>
+            <option value="">Select Gender</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="age" class="form-label">Age:</label>
+        <input type="number" name="n2" id="age" class="form-control" min="0" max="120" required>
+    </div>
+
+    <fieldset class="mb-3">
+        <legend>Do you smoke:</legend>
+        <div class="form-check">
+            <input type="radio" name="n3" id="smoking_yes" value="2" class="form-check-input" required>
+            <label for="smoking_yes" class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" name="n3" id="smoking_no" value="1" class="form-check-input">
+            <label for="smoking_no" class="form-check-label">No</label>
+        </div>
+    </fieldset>
+
+    <fieldset class="mb-3">
+        <legend>Yellow Fingers:</legend>
+        <div class="form-check">
+            <input type="radio" name="n4" id="yellow_yes" value="2" class="form-check-input" required>
+            <label for="yellow_yes" class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" name="n4" id="yellow_no" value="1" class="form-check-input">
+            <label for="yellow_no" class="form-check-label">No</label>
+        </div>
+    </fieldset>
+
+    <div class="mb-3">
+        <label for="anxiety" class="form-label">Anxiety Level:</label>
+        <select name="n5" id="anxiety" class="form-select" required>
+            <option value="">Select Level</option>
+            <option value="1">None</option>
+            <option value="1">Mild</option>
+            <option value="2">Moderate</option>
+            <option value="2">Severe</option>
+        </select>
+    </div>
+
+    <fieldset class="mb-3">
+        <legend>Peer Pressure:</legend>
+        <p class="small">Do people around you offer or force you to smoke?</p>
+        <div class="form-check">
+            <input type="radio" name="n6" id="peer_yes" value="2" class="form-check-input" required>
+            <label for="peer_yes" class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" name="n6" id="peer_no" value="1" class="form-check-input">
+            <label for="peer_no" class="form-check-label">No</label>
+        </div>
+    </fieldset>
+
+    <fieldset class="mb-3">
+        <legend>Do you have any Chronic Disease?</legend>
+        <div class="form-check">
+            <input type="radio" name="n7" id="chronic_yes" value="2" class="form-check-input" required>
+            <label for="chronic_yes" class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" name="n7" id="chronic_no" value="1" class="form-check-input">
+            <label for="chronic_no" class="form-check-label">No</label>
+        </div>
+    </fieldset>
+
+    <fieldset class="mb-3">
+        <legend>Do you feel fatigue often?</legend>
+        <div class="form-check">
+            <input type="radio" name="n8" id="fatigue_yes" value="2" class="form-check-input" required>
+            <label for="fatigue_yes" class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" name="n8" id="fatigue_no" value="1" class="form-check-input">
+            <label for="fatigue_no" class="form-check-label">No</label>
+        </div>
+    </fieldset>
+
+    <fieldset class="mb-3">
+        <legend>Do you have any known allergies?</legend>
+        <div class="form-check">
+            <input type="radio" name="n9" id="allergy_yes" value="2" class="form-check-input" required>
+            <label for="allergy_yes" class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" name="n9" id="allergy_no" value="1" class="form-check-input">
+            <label for="allergy_no" class="form-check-label">No</label>
+        </div>
+    </fieldset>
+
+    <fieldset class="mb-3">
+        <legend>Do you experience wheezing?</legend>
+        <div class="form-check">
+            <input type="radio" name="n10" id="wheezing_yes" value="2" class="form-check-input" required>
+            <label for="wheezing_yes" class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" name="n10" id="wheezing_no" value="1" class="form-check-input">
+            <label for="wheezing_no" class="form-check-label">No</label>
+        </div>
+    </fieldset>
+
+    <div class="mb-3">
+        <label for="alcohol_consuming" class="form-label">Alcohol Consumption:</label>
+        <select name="n11" id="alcohol_consuming" class="form-select" required>
+            <option value="">Select Frequency</option>
+            <option value="1">Never</option>
+            <option value="2">Occasionally</option>
+            <option value="2">Regularly</option>
+        </select>
+    </div>
+
+    <fieldset class="mb-3">
+        <legend>Do you experience coughing?</legend>
+        <div class="form-check">
+            <input type="radio" name="n12" id="coughing_yes" value="2" class="form-check-input" required>
+            <label for="coughing_yes" class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" name="n12" id="coughing_no" value="1" class="form-check-input">
+            <label for="coughing_no" class="form-check-label">No</label>
+        </div>
+    </fieldset>
+
+    <fieldset class="mb-3">
+        <legend>Shortness of Breath:</legend>
+        <div class="form-check">
+            <input type="radio" name="n13" id="shortness_yes" value="2" class="form-check-input" required>
+            <label for="shortness_yes" class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" name="n13" id="shortness_no" value="1" class="form-check-input">
+            <label for="shortness_no" class="form-check-label">No</label>
+        </div>
+    </fieldset>
+
+    <fieldset class="mb-3">
+        <legend>Do you have difficulty swallowing?</legend>
+        <div class="form-check">
+            <input type="radio" name="n14" id="swallowing_yes" value="2" class="form-check-input" required>
+            <label for="swallowing_yes" class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" name="n14" id="swallowing_no" value="1" class="form-check-input">
+            <label for="swallowing_no" class="form-check-label">No</label>
+        </div>
+    </fieldset>
+
+    <div class="mb-3">
+        <label for="chest_pain" class="form-label">Chest Pain Severity:</label>
+        <select name="n15" id="chest_pain" class="form-select" required>
+            <option value="">Select Frequency</option>
+            <option value="1">Never</option>
+            <option value="2">Occasionally</option>
+            <option value="2">Regularly</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="family_history" class="form-label">Family History with Cancer:</label>
+        <select name="n16" id="family_history" class="form-select" required>
+            <option value="">Select Type</option>
+            <option value="1">None</option>
+            <option value="2">Lung Cancer</option>
+            <option value="2">Breast Cancer</option>
+            <option value="2">Colon Cancer</option>
+            <option value="2">Other</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+
+
+<!-- Modal -->
+ <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resultModalLabel">Prediction Result</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Result will appear here -->
+                    <p id="modalResult">{{ result2 }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" action="predict" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Check if there is a result passed from Django
+    {% if result2 %}
+        // Initialize and show the modal
+        var resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+        resultModal.show();
+    {% else %}
+        console.log("No result data available.");
+    {% endif %}
+</script>
+
+</body>
+</html>
